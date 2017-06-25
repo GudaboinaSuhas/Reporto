@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/> 
+    
+
+    <!-- external CSS files -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+   
+  </head>
+
+  <body>
+     <nav class="grey darken-4" role="navigation">
+         <div class="nav-wrapper container" style="font-family:OmegaFont;font-size:30px;">
+            <a id="logo-container" class="center" href="#" class="brand-logo"><img src="cvrlogo.png" width="130px"></a>
+            <a id="logo-container" class="center" class="brand-logo">CVR COLLEGE OF ENGINEERING</a>
+            <!--<a id="logo-container" class="center" class="brand-logo">CVR COLLEGE OF ENGINEERING</a>-->
+            
+         </div>
+      </nav>
+      <nav class="grey darken-4" role="navigation" style:"height:26px;">
+         <div class="nav-wrapper container" style="height:26px;">
+            <ul class="right hide-on-med-and-down">
+                <li><a href="about.html" style="color:white">About</a></li>
+               <li><a href="admin_panel.html" style="color:white">Admin Portal</a></li>
+               <li><a href="logout.php" style="color:white">Logout</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="about.html" data-toggle="modal" data-target="#myModal">About</a></li>
+               <li><a href="admin_panel.html">Admin Portal</a></li>
+               <li><a href="logout.php">Logout</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+            <i class="material-icons">menu</i></a>
+         </div>
+      </nav> 
+
+  
+      <div class="row">
+            <div class="col-8">    
+                <div class="container-fluid" style="background-color:#FFFFFF;">
+                    <div class="container">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+<div class="row">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">Generating Reports:</h3>
+        <br>
+        <br>
+        Choose on what basis the reports must be generated !
+        <br><br>
+        <div class="row">
+        <div class="col-sm-4">
+        <select name="Year" class="form-control">
+            <option value="1">Year</option>
+            <option value="2">I</option>
+            <option value="3">II</option>
+            <option value="4">III</option>
+            <option value="5">IV</option>
+        </select>
+        </div>
+        <br>
+        <div class="col-sm-4">
+        <select name="Branch" class="form-control">
+            <option value="1">Branch</option>
+            <option value="2">CSE</option>
+            <option value="3">ECE</option>
+            <option value="4">IT</option>
+            <option value="5">Mech</option>
+            <option value="6">Civil</option>
+        </select>
+        </div>
+        <div class="col-sm-4">
+        <select name="Sort" class="form-control">
+            <option value="1">Sort</option>
+            <option value="2">RollNo</option>
+            <option value="3">Percentage</option>
+            <option value="4">Section</option>
+        </select>
+        </div>
+        </div>
+        <div class="col-sm-3">
+            <a href="#" class="btn btn-primary">Generate</a>
+        </div>
+        <br>
+    </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">Insert Records</h3>
+        <br>
+        <br>
+        Update the student details in the database.
+        <br><br>
+        <a href="admin_insertion.html" target="_blank" class="btn btn-primary">Insert</a>
+        <br>
+    </div>
+    </div>
+  </div>
+  
+</div>
+
+
+      
+      <footer class="page-footer black">
+         <div class="footer-copyright">
+            <div class="container center" style="color:white; font-size:10px">
+               <h6>Mini Project on "Design and Implementation of Web-based system for course outcomes data analysis"</h6>
+               <div class="row center">
+                   <div class="col-md-3" style="font-size:18px">
+                       <br>Contributors:
+                       <div style="font-size:12px;padding-top:10px;">
+                           Suhas Gudaboina<br>Uzma Farhath<br>Yashwanth Reddy
+                       </div>
+                   </div>
+                    <div class="col-md-9" style="font-size:18px">
+                        <br>Mentor:
+                       <div style="font-size:12px;padding-top:10px;">
+                           Dr. K. Venkateshwara Rao ( Professor CSE )
+                       </div>
+                    </div>
+                     <br>
+               </div>
+                Team ShadowBreakers
+            </div>
+         </div>
+      </footer>
+
+      
+
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="js/init.js"></script> 
+
+      <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  
+  
+  </body>
+</html>
+
+
