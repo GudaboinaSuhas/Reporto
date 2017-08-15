@@ -1,0 +1,21 @@
+INSERT INTO `student_marks` (`Roll_No`, `Examination_Code`, `Marks`, `Max_Marks`) VALUES ('14B81A05R7', 'CD001', '24', '25'), ('14B81A05R7', 'CD002', '73', '75')
+
+
+SELECT exam_questions_table.Roll_No,exam_questions_table.Course_Code,
+exam_questions_table.Examination_Code,exam_questions_table.Course_Outcome_Id,
+student_marks.Marks,student_marks.Max_Marks FROM exam_questions_table 
+INNER JOIN student_marks ON exam_questions_table.Roll_No=student_marks.Roll_No AND 
+exam_questions_table.Examination_Code=student_marks.Examination_Code WHERE exam_questions_table.Course_Code='12CS302CV' 
+AND exam_questions_table.Examination_Code='CG001' ORDER BY student_marks.Marks;
+
+SELECT exam_questions_table.Roll_No,exam_questions_table.Course_Code,
+exam_questions_table.Examination_Code,exam_questions_table.Course_Outcome_Id,
+student_marks.Marks,student_marks.Max_Marks FROM exam_questions_table 
+INNER JOIN student_marks ON exam_questions_table.Roll_No=student_marks.Roll_No AND 
+exam_questions_table.Examination_Code=student_marks.Examination_Code WHERE 
+exam_questions_table.Course_Code LIKE '%' AND 
+exam_questions_table.Examination_Code LIKE '%' AND 
+exam_questions_table.Roll_No='14B81A05R7' ORDER BY student_marks.Marks
+
+SELECT student_marks.Roll_No,sum(Marks) as Total 
+FROM student_marks GROUP BY Roll_No

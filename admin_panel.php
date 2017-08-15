@@ -78,7 +78,7 @@ if(isset($_POST['Insert_SED']))
     
     $sql="INSERT INTO exam_questions_table (Course_Code,Examination_Code,Roll_No,Course_Outcome_Id) VALUES ('$Course_Code', '$Examination_Code', '$Roll_No', '$Course_Outcome_Id');";
     mysqli_query($connection,$sql);
-    $_SESSION['message']="You are now registered";
+    
 }
 if(isset($_POST['Insert_SMD']))
 {
@@ -89,9 +89,31 @@ if(isset($_POST['Insert_SMD']))
     
     $sql="INSERT INTO exam_questions_table (Roll_No,Examination_Code,Marks,Max_Marks) VALUES ('$Roll_No', '$Examination_Code', '$Marks', '$Max_Marks');";
     mysqli_query($connection,$sql);
-    $_SESSION['message']="You are now registered";
 }
-
+if(isset($_POST['Insert_Q']))
+{
+    $Course_Code=mysqli_real_escape_string($connection,$_POST['Course_Code']);
+    $Examination_Code=mysqli_real_escape_string($connection,$_POST['Examination_Code']);
+    $Q_ID=mysqli_real_escape_string($connection,$_POST['Q_ID']);
+    $Course_Outcome_Id=mysqli_real_escape_string($connection,$_POST['Course_Outcome_Id']);
+    
+    $sql="INSERT INTO questions_table (Course_Code,Examination_Code,Q_ID,Course_Outcome_Id) VALUES ('$Course_Code', '$Examination_Code', '$Q_ID', '$Course_Outcome_Id');";
+    mysqli_query($connection,$sql);
+}
+if(isset($_POST['Insert_QM']))
+{
+    $Branch_Code=mysqli_real_escape_string($connection,$_POST['Branch_Code']);
+    $Roll_No=mysqli_real_escape_string($connection,$_POST['Roll_No']);
+    $Course_Code=mysqli_real_escape_string($connection,$_POST['Course_Code']);
+    $Examination_Code=mysqli_real_escape_string($connection,$_POST['Examination_Code']);
+    $Q_ID=mysqli_real_escape_string($connection,$_POST['Q_ID']);
+    $Course_Outcome_Id=mysqli_real_escape_string($connection,$_POST['Course_Outcome_Id']);
+    $Marks_Obtained=mysqli_real_escape_string($connection,$_POST['Marks_Obtained']);
+    $Total=mysqli_real_escape_string($connection,$_POST['Total']);
+    
+    $sql="INSERT INTO questions_mapping (Branch_Code,Roll_No,Course_Code,Examination_Code,Q_ID,Course_Outcome_Id,Marks_Obtained,Total) VALUES ('$Branch_Code','$Roll_No','$Course_Code','$Examination_Code','$Q_ID', '$Course_Outcome_Id', '$Marks_Obtained', '$Total');";
+    mysqli_query($connection,$sql);
+}
 ?>
 
 <html>
@@ -124,12 +146,10 @@ if(isset($_POST['Insert_SMD']))
          <div class="nav-wrapper container" style="height:26px;">
             <ul class="right hide-on-med-and-down">
                 <li><a href="about.html" style="color:white">About</a></li>
-               <li><a href="admin_panel.html" style="color:white">Admin Portal</a></li>
                <li><a href="logout.php" style="color:white">Logout</a></li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
                 <li><a href="about.html" data-toggle="modal" data-target="#myModal">About</a></li>
-               <li><a href="admin_panel.html">Admin Portal</a></li>
                <li><a href="logout.php">Logout</a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse">
@@ -290,7 +310,7 @@ if(isset($_POST['Insert_SMD']))
     </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="card">
       <div class="card-block">
         <h3 class="card-title">Enter Student Mark Details</h3>
@@ -310,7 +330,51 @@ if(isset($_POST['Insert_SMD']))
     </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">Enter Question to CO Id Details</h3>
+        <br>
+        <br>
+        Update the Question Pattern of an Exam for the Course in the database.
+        <div class="col-sm-12">
+        <form action="" method="POST">            
+        <input type="text" name="Course_Code" placeholder="Course Code">        
+        <input type="text" name="Examination_Code" placeholder="Examination Code">
+        <input type="text" name="Q_ID" placeholder="Quesion ID">
+        <input type="text" name="Course_Outcome_Id" placeholder="Course Outcome Id">
+        <br>
+        <input type="submit" class="btn btn-primary" value="Insert" name="Insert_Q">
+        <br></form>
+        </div>
+    </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">Enter Question Mapping Details</h3>
+        <br>
+        <br>
+        Update the Student Question Marks of an Exam for the Course in the database.
+        <div class="col-sm-12">
+        <form action="" method="POST">     
+        <input type="text" name="Branch_Code" placeholder="Branch Code">       
+        <input type="text" name="Roll_No" placeholder="Roll No">
+        <input type="text" name="Course_Code" placeholder="Course Code">
+        <input type="text" name="Examination_Code" placeholder="Examination Code">
+        <input type="text" name="Q_ID" placeholder="Question ID">        
+        <input type="text" name="Course_Outcome_Id" placeholder="Course Outcome Id">
+        <input type="text" name="Marks_Obtained" placeholder="Marks Obtained">
+        <input type="text" name="Total" placeholder="Total">
+        <br>
+        <input type="submit" class="btn btn-primary" value="Insert" name="Insert_QM">
+        <br></form>
+        </div>
+    </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
     <div class="card">
       <div class="card-block">
         <h3 class="card-title">See Reports</h3>
@@ -319,7 +383,8 @@ if(isset($_POST['Insert_SMD']))
         <div class="col-sm-12">
         <form action="" method="POST">            
         <br>
-        <a href="reports.php" class="btn btn-primary">Reports</a>
+        <a href="reports.php" class="btn btn-primary">Student Wise Reports</a>
+         <a href="reports1.php" class="btn btn-primary">Questions vs CO Reports</a>
         <br></form>
         </div>
     </div>

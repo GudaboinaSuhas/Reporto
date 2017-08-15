@@ -4,7 +4,7 @@
     session_destroy();
     unset($_SESSION['username']);
     die("You're now logged out");
-    header("location:login.php");
+    header('location:index.php');
 
 ?>
 

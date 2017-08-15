@@ -1,7 +1,8 @@
 <?php
 session_start();
-$connection=mysqli_connect("localhost","root","","miniproject_faculty") or die("Unable to connect to the database!");
-if(isset($_POST['register']))
+//$connection=mysqli_connect("localhost","root","","miniproject_faculty") or die("Unable to connect to the database!");
+$connection=mysqli_connect("localhost","id918800_minip","minip","id918800_minip") or die("Unable to connect to the database!");
+if(isset($_POST['submit']))
 {
     $username=mysqli_real_escape_string($connection,$_POST['username']);
     $email_id=mysqli_real_escape_string($connection,$_POST['email']);
@@ -14,7 +15,7 @@ if(isset($_POST['register']))
         $sql="INSERT INTO faculty (user_id,username,email_id,password,branch,mobile_no,secret_code) VALUES (NULL, '$username', '$email_id', '$password', '$branch', '$mobile_no', '$secret_code');";
         mysqli_query($connection,$sql);
         $_SESSION['message']="You are now registered";
-        header("location:login.php");
+        header("location:index.php");
     }
     else{
         $_SESSION['message']="Invalid secret code";
@@ -40,7 +41,38 @@ if(isset($_POST['register']))
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-   
+    <script type="text/javascript">
+        function validate()
+        {
+            var a = document.register.username.value;
+            var b = document.register.email.value;
+            var c = document.register.branch.value;
+            var d = document.register.password.value;
+            var e = document.register.mobile.value;
+            var f = document.register.secretcode.value;
+            if(a=="") {
+                alert("Please enter your username");
+                document.login.username.focus();
+                return false; }
+            if (b=="") {
+                alert("Please enter your email");
+                return false; }
+            if(c=="") {
+                alert("Please enter your branch code");
+                document.login.username.focus();
+                return false; }
+            if (d=="") {
+                alert("Please enter your password");
+                return false; }
+            if(e=="") {
+                alert("Please enter your mobile number");
+                document.login.username.focus();
+                return false; }
+            if (f=="") {
+                alert("Please enter valid secret code");
+                return false; }
+        } 
+</script>
   </head>
 
   <body>
@@ -90,7 +122,7 @@ if(isset($_POST['register']))
                   <div class="card-block">
                       
                         <br>
-                    <form action='' method="post">
+                    <form name='register' onSubmit="return validate();" action='' method="post" validate>
                         Username:<input type="text" name="username">
                         Email id:<input type="text" name="email">
                         Branch: <input type="text" name="branch">
@@ -99,7 +131,7 @@ if(isset($_POST['register']))
                         Mobile Number:<input type="text" name="mobile">
                         Secret Code:<input type="password" name="secretcode">
                         <br>
-                        <input type="submit" class="btn btn-primary" name="register" value="Register">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Register">
                         <br>
                          <?php
         if(isset($_SESSION['message']))

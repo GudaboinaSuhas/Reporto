@@ -1,0 +1,250 @@
+
+-----------------------------------------Creating Tables-----------------------------------------------
+
+CREATE TABLE `miniproject_faculty`.`Course_Table` 
+( `S.no` INT NOT NULL AUTO_INCREMENT , `Course_Code` VARCHAR(10) NOT NULL , 
+`Course_Title` VARCHAR(10) NOT NULL , `Syllabus` VARCHAR(30) NOT NULL , 
+PRIMARY KEY (`Course_Code`)) ENGINE = InnoDB;
+
+CREATE TABLE `miniproject_faculty`.`Course_Outcome_Table` 
+( `Course_Code` VARCHAR(10) NOT NULL , `Course_Outcome_Id` VARCHAR(10) NOT NULL ,
+ `Outcome_Description` VARCHAR(30) NOT NULL , 
+PRIMARY KEY (`Course_Outcome_Id`)) ENGINE = InnoDB;
+
+CREATE TABLE `miniproject_faculty`.`Branch_Table` 
+( `Branch_Code` VARCHAR(10) NOT NULL , `Branch_Name` VARCHAR(20) NOT NULL 
+, `Department` VARCHAR(20) NOT NULL , 
+PRIMARY KEY (`Branch_Code`)) ENGINE = InnoDB;
+
+CREATE TABLE `miniproject_faculty`.`Student_Table` 
+( `Roll_No` VARCHAR(15) NOT NULL , `Student_Name` VARCHAR(20) NOT NULL , 
+`Branch_Code` VARCHAR(10) NOT NULL , 
+PRIMARY KEY (`Roll_No`)) ENGINE = InnoDB;
+
+CREATE TABLE `miniproject_faculty`.`Faculty_Table` 
+( `Faculty_Id` VARCHAR(15) NOT NULL , `Faculty_Name` VARCHAR(20) NOT NULL , 
+`Faculty_Qualification` VARCHAR(20) NOT NULL , `Faculty_Designation` VARCHAR(20) NOT NULL , 
+`Faculty_Specialization` VARCHAR(20) NOT NULL , 
+PRIMARY KEY (`Faculty_Id`)) ENGINE = InnoDB;
+
+CREATE TABLE `miniproject_faculty`.`Examination_Table` 
+( `Examination_Code` VARCHAR(20) NOT NULL , `Examination_Type` VARCHAR(20) NOT NULL , 
+`Max_Marks` INT NOT NULL , 
+PRIMARY KEY (`Examination_Code`)) ENGINE = InnoDB;
+
+CREATE TABLE `exam_questions_table` (
+  `Course_Code` varchar(10) NOT NULL,
+  `Examination_Code` varchar(20) NOT NULL,
+  `Roll_No` varchar(15) NOT NULL,
+  `Course_Outcome_Id` varchar(10) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `student_marks` (
+  `Roll_No` varchar(15) NOT NULL,
+  `Examination_Code` varchar(20) NOT NULL,
+  `Marks` INT NOT NULL,
+  `Max_Marks` INT NOT NULL , 
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-----------------------------------------Adding Foreign Keys and Relations between Tables-----------------------------------------------
+
+Adding Foreign Key (Course_Id) in Course_Outcome_Table referencing to Course_Id of Course_Table--->
+
+ALTER TABLE `course_outcome_table` ADD CONSTRAINT `fkey1` FOREIGN KEY (`Course_Code`) 
+REFERENCES `miniproject_faculty`.`course_table`(`Course_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Course_Id) in Course_Exam_Table referencing to Course_Id of Course_Table--->
+
+ALTER TABLE `course_exam_table` ADD CONSTRAINT `fkey2` FOREIGN KEY (`Course_Code`) 
+REFERENCES `miniproject_faculty`.`course_table`(`Course_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Examination_Code) in Course_Exam_Table referencing to Examination_Code of Examination_Table--->
+
+ALTER TABLE `course_exam_table` ADD CONSTRAINT `fkey3` FOREIGN KEY (`Examination_Code`) 
+REFERENCES `miniproject_faculty`.`examination_table`(`Examination_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Course_Id) in Exam_Questions_Table referencing to Course_Id of Course_Table--->
+
+ALTER TABLE `exam_questions_table` ADD CONSTRAINT `fkey4` FOREIGN KEY (`Course_Code`) 
+REFERENCES `miniproject_faculty`.`course_table`(`Course_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Examination_Code) in Exam_Questions_Table referencing to Examination_Code of Examination_Table--->
+
+ALTER TABLE `exam_questions_table` ADD CONSTRAINT `fkey5` FOREIGN KEY (`Examination_Code`) 
+REFERENCES `miniproject_faculty`.`examination_table`(`Examination_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Part_Id) in Exam_Questions_Table referencing to Part_Id of Course_Exam_Table--->
+
+ALTER TABLE `exam_questions_table` ADD CONSTRAINT `fkey6` FOREIGN KEY (`Part_Id`) 
+REFERENCES `miniproject_faculty`.`course_exam_table`(`Part_Id`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+Adding Foreign Key (Course_Outcome_Id) in Exam_Questions_Table referencing to Course_Outcome_Id of Course_Outcome_Table--->
+
+ALTER TABLE `exam_questions_table` ADD CONSTRAINT `fkey7` FOREIGN KEY (`Course_Outcome_Id`) 
+REFERENCES `miniproject_faculty`.`course_outcome_table`(`Course_Outcome_Id`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `student_marks` ADD CONSTRAINT `fkey8` FOREIGN KEY (`Roll_No`) 
+REFERENCES `miniproject_faculty`.`student_table`(`Roll_No`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `student_marks` ADD CONSTRAINT `fkey9` FOREIGN KEY (`Examination_Code`) 
+REFERENCES `miniproject_faculty`.`examination_table`(`Examination_Code`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `student_marks` ADD CONSTRAINT `fkey10` FOREIGN KEY (`Max_Marks`) 
+REFERENCES `miniproject_faculty`.`examination_table`(`Max_Marks`) 
+ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-----------------------------------------Inserting into Tables-----------------------------------------------
+
+Inserting data into Course Table--->
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12CS302CV', 'Computer Graphics', 'Introduction, Output Primitives, 
+2-D Transforms and Viewing, 3-D transformations,etc.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12CS351CV', 'Compiler Design', 'Compiler Phases, Grammars, Parsers, 
+Semantic Analysis, Symbol Tables, Code Optimization, Object Code Generation.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12CS352CV', 'Network Security', 'Introduction, Symmetric Encryption, 
+Public Key Cryptography, IP Security, etc.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12IT351CV', 'Web Technologies', 'HTML Common Tags, 
+Intoduction to JS, XML, JavaBeans, Web Servers, JSP,etc.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12EC353CV', 'MPMC', '8086 Architecture, 8086, Memory and I/O Interfacing, 
+DMA Controllers, Serial Communication Interface, Microcontrollers, 8051, AVR.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12CS355CV', 'WNMC', 'MAC, Mobile IP Network Layer, 
+Mobile Transport Layer, Database Issues, MANETS.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12IT383CV', 'Web Technologies Lab', 'HTML, CSS, 
+JS, JSP, JavaBeans, JDBC.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12EC381CV', 'MPMC Lab', '8086, 8251, 8051.');
+
+INSERT INTO `course_table` (`Course_Code`, `Course_Title`, `Syllabus`) 
+VALUES ('12MT381CV', 'Quantitative Ability Lab', 'Number Systems, 
+PErcentages, Profit and Loss, Interest, Time and Distance, Averages, etc.');
+
+Inserting data into Course Outcome Table--->
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES
+('12CS351CV', 'CO1', 'Understand the basic concept of compiler design, and its different phases which will be helpful to construct new tools \r\nlike LEX, YACC etc.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS351CV', 'CO2', 'Acquire knowledge \r\nin different phases and passes of compiler.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS351CV', 'CO3', 'Ability to implement semantic rules into a parser that performs \r\nattribution while parsing and apply error detection and correction methods.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS351CV', 'CO4', 'Design a compiler for a consice programming language.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO1', 'History of graphic communication and the main concepts behind visual communications theories.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO2', 'Define basic computing terms dealing with graphic software applications, hardware,etc.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO3', 'Demonstrate the process of graphic design productivity by synthesizing information gathered from various stakeholders.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO4', 'List and describe the basic design, terms, and concepts and demonstrate an intelligent choice of type, color, images in communicating effectively.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO5', 'Explain the importance of consistency of design, usability and core messaging.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO6', 'To understand contemporary terminology, progress, issues and trends.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO7', 'Geometric transformations, geometric algorithms, software systems.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS302CV', 'CO8', 'The interdisciplinary nature of computer graphics is emphasized in the wide variety of examples and applications.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO1', 'Become familiar with information security goals, attacks, services and mechanisms and to understand the models of security.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO2', 'To demonstrate the principles of symmetric encryption and algorithms and become familiar with secure hash algorithms and HMAC.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO3', 'To implement the working principle of public key algorithms and know their applications.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO4', 'Effectively learn the popular email security services.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO5', 'To appreciate the mandated security headers introduced in IP version 6.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO6', 'To adapt protocols like SSL, TLS, SET.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO7', 'Become familiar with the classification of intruders and viruses and study the mechanisms to counterfeit them.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS352CV', 'CO8', 'Become familiar with the concepts of Firewalls, Trusted systems and IDS.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO1', 'Compare and contrast HTML,CSS,Js.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO2', 'Implement JS to perform client-side functionalities and provide generic code across multiple domains such as Banking.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO3', 'Assess and evaluate the role of Web Services for the management and delivery of electronic information.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO4', 'Develop Web Applications using Servlet technology.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO5', 'Design well-formed JSP pages and JSP documents.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO6', 'Use new technologies to be used in JSP pages such as EL,JSTL.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO7', 'Develop JDBC programs to access and RDBMS.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12IT351CV', 'CO8', 'Develop Web Applications using Servlet technology, JSP and Databases.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12EC353CV', 'CO1', 'Study and understand internal structure and external connection of microprocessor.\r\n');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12EC353CV', 'CO2', 'Write Assembly level language programs for any application using MASM Software.\r\n');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12EC353CV', 'CO3', 'Understand the architectural difference between the Processor and Controllers.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12EC353CV', 'CO4', 'Describe the instruction set and Addressing modes difference between 8086 and 8051.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12EC353CV', 'CO5', 'Understand the advanced features of AVR microcontrollers compared with 8051.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO1', 'Apply advanced data communication methods and networking protocols for wireless and mobile environment.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO2', 'Utilize and employ application frame works for developing mobile applications including under disconnected and weekly connected environment.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO3', 'Select components and networks for particular application.');
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO4', 'Understand issues related to client server computing with adaptation, power-aware and context aware computing and MANET Protocols.');
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO5', 'Have a good understanding of how the underlying wireless and mobile communication networks work, their technical features.\r\n'),;
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO6', 'Identify the important issues of developing mobile computing systems and applications.'),
+
+INSERT INTO `course_outcome_table` (`Course_Code`, `Course_Outcome_Id`, `Outcome_Description`) VALUES('12CS355CV', 'CO7', 'Organize and manage software built for deployment and demonstration.');
+
+Inserting data into Branch Table--->
+
+INSERT INTO `branch_table` (`Branch_Code`, `Branch_Name`, `Department`) VALUES ('CSE', 'CSE', 'Computer Science');
+INSERT INTO `branch_table` (`Branch_Code`, `Branch_Name`, `Department`) VALUES ('ECE', 'ECE', 'Electronics & Comms');
+INSERT INTO `branch_table` (`Branch_Code`, `Branch_Name`, `Department`) VALUES ('EEE', 'EEE', 'Electrical');
+INSERT INTO `branch_table` (`Branch_Code`, `Branch_Name`, `Department`) VALUES ('IT', 'IT', 'Information Tech');
+
+Inserting data into Student Table--->
+
+INSERT INTO `student_table` (`Roll_No`, `Student_Name`, `Branch_Code`) VALUES ('14B81A05R7', 'Suhas Gudaboina', 'CSE');
+INSERT INTO `student_table` (`Roll_No`, `Student_Name`, `Branch_Code`) VALUES ('14B81A05R8', 'Sukanya Reddy', 'CSE');
+INSERT INTO `student_table` (`Roll_No`, `Student_Name`, `Branch_Code`) VALUES ('14B81A05R6', 'Subha Sekhar Reddy', 'CSE');
+
+Inserting data into Faculty Table--->
+
+INSERT INTO `faculty_table` (`Faculty_Id`, `Faculty_Name`, `Faculty_Qualification`, `Faculty_Designation`, `Faculty_Specialization`) VALUES ('CVR01', 'Bhavya', 'M.Tech', 'Assistant Professor', 'Web Technologies');
+INSERT INTO `faculty_table` (`Faculty_Id`, `Faculty_Name`, `Faculty_Qualification`, `Faculty_Designation`, `Faculty_Specialization`) VALUES ('CVR02', 'Badrinarayana', 'M.Tech', 'Senior Professor', 'Linux Programming');
+INSERT INTO `faculty_table` (`Faculty_Id`, `Faculty_Name`, `Faculty_Qualification`, `Faculty_Designation`, `Faculty_Specialization`) VALUES ('CVR03', 'Narender Reddy K', 'Phd', 'Senior Professor', 'Operating Systems');
+INSERT INTO `faculty_table` (`Faculty_Id`, `Faculty_Name`, `Faculty_Qualification`, `Faculty_Designation`, `Faculty_Specialization`) VALUES ('CVR04', 'Venkateshwara Rao K', 'Phd', 'Senior Professor', 'UNIX');
+
+Inserting data into Examination Table--->
+
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('CD001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('CD002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('CG001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('CG002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WT001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WT002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('MPMC001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('MPMC002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('NS001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('NS002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WN001', 'mid', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WN002', 'sem', '75');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WT_INT', 'Lab', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('WT_EXT', 'Lab', '50');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('MPMC_INT', 'Lab', '25');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('MPMC_EXT', 'Lab', '50');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('QA_INT', 'mid', '20');
+INSERT INTO `examination_table` (`Examination_Code`, `Examination_Type`, `Max_Marks`) VALUES ('QA_EXT', 'sem', '30');
+
+
+

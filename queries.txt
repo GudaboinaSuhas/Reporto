@@ -1,0 +1,14 @@
+SELECT COUNT(Q_ID),sum(Marks_Obtained),sum(Total) 
+FROM `questions_mapping` WHERE Q_ID=11
+
+
+--->to get the count of questions per CO Id
+SELECT Course_Outcome_Id,COUNT(Q_ID) FROM `questions_table` 
+where Course_Code like '%' and Examination_Code like '%' 
+GROUP BY Course_Outcome_Id
+
+--->to get the count and marks obtained by the students per each question
+SELECT Q_ID,COUNT(Q_ID),sum(Marks_Obtained),
+sum(Total),Course_Outcome_Id FROM `questions_mapping`
+where Course_Code like '%' and Examination_Code like '%'   
+GROUP BY Q_ID

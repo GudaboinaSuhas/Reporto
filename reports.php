@@ -73,7 +73,7 @@ $connection=mysqli_connect("localhost","id918800_minip","minip","id918800_minip"
                             Course Outcome Id<input type="text" name="Course_Outcome_Id" placeholder="CO1/CO2/CO3/CO4">
                          
         <br><br>
-        <input type="submit" class="btn btn-primary" value="Insert" name="Generate">
+        <input type="submit" class="btn btn-primary" value="Generate" name="Generate">
         <br></form>
         </div>
     </div>
@@ -186,7 +186,7 @@ $connection=mysqli_connect("localhost","id918800_minip","minip","id918800_minip"
                             Examination Code<input type="text" name="Examination_Code" placeholder="CD001/WT002">
                          
         <br><br>
-        <input type="submit" class="btn btn-primary" value="Insert" name="GenerateE">
+        <input type="submit" class="btn btn-primary" value="Generate" name="GenerateE">
         <br></form>
         </div>
     </div>
